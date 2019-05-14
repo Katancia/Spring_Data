@@ -3,10 +3,10 @@ package pl.karol.devicrent;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
-import pl.karol.devicrent.dao.DeviceDao;
 import pl.karol.devicrent.entity.Category;
 import pl.karol.devicrent.entity.Customer;
 import pl.karol.devicrent.entity.Device;
+import pl.karol.devicrent.repository.DeviceRepository;
 
 @SpringBootApplication
 public class DevicrentApplication {
@@ -14,7 +14,7 @@ public class DevicrentApplication {
     public static void main(String[] args) {
         ConfigurableApplicationContext ctx = SpringApplication.run(DevicrentApplication.class, args);
 
-        DeviceDao deviceDao = ctx.getBean(DeviceDao.class);
+        DeviceRepository deviceRepository = ctx.getBean(DeviceRepository.class);
         Device device = new Device();
         device.setName("Wiertarka udarowa");
         device.setDescription("Wiertarka udarowa o dużej mocy 3000W z zestawem wierteł w komplecie");
@@ -34,6 +34,6 @@ public class DevicrentApplication {
         device.setCategory(category);
         device.addCustomer(customer);
 
-        deviceDao.save(device);
+        deviceRepository.save(device);
     }
 }
