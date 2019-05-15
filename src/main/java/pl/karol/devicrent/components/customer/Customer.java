@@ -1,4 +1,6 @@
-package pl.karol.devicrent.entity;
+package pl.karol.devicrent.components.customer;
+
+import pl.karol.devicrent.components.device.Device;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,6 +24,16 @@ public class Customer {
   private String idNumber;
   @ManyToMany(mappedBy = "customers")
   private List<Device> rentDevices = new ArrayList<>();
+
+  public Customer() {
+  }
+
+  public Customer(String firstName, String lastName, String pesel, String idNumber) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.pesel = pesel;
+    this.idNumber = idNumber;
+  }
 
   public long getId() {
     return id;

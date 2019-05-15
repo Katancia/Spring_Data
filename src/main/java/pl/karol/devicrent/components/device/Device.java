@@ -1,4 +1,7 @@
-package pl.karol.devicrent.entity;
+package pl.karol.devicrent.components.device;
+
+import pl.karol.devicrent.components.category.Category;
+import pl.karol.devicrent.components.customer.Customer;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -26,6 +29,17 @@ public class Device {
     inverseJoinColumns = {@JoinColumn(name = "customer_id", referencedColumnName = "id")}
   )
   private List<Customer> customers = new ArrayList<>();
+
+  public Device() {
+  }
+
+  public Device(String name, String description, long quantity, double price, Category category) {
+    this.name = name;
+    this.description = description;
+    this.quantity = quantity;
+    this.price = price;
+    this.category = category;
+  }
 
   public long getId() {
     return id;

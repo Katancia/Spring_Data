@@ -1,4 +1,6 @@
-package pl.karol.devicrent.entity;
+package pl.karol.devicrent.components.category;
+
+import pl.karol.devicrent.components.device.Device;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -17,6 +19,14 @@ public class Category {
   private String description;
   @OneToMany(mappedBy = "category")
   private Set<Device> device = new HashSet<>();
+
+  public Category() {
+  }
+
+  public Category(String name, String description) {
+    this.name = name;
+    this.description = description;
+  }
 
   public long getId() {
     return id;
