@@ -35,11 +35,11 @@ public class RentController {
     }
 
     private void rent() {
-        System.out.println("Give customer id");
-        Long customerId = scanner.nextLong();
+        System.out.println("Give customer pesel");
+        String customerPesel = scanner.nextLine();
         System.out.println("Give device id");
         Long deviceId = scanner.nextLong();
-        Optional<Customer> customer = customerRepository.findById(customerId);
+        Optional<Customer> customer = customerRepository.findByPesel(customerPesel);
         Optional<Device> device = deviceRepository.findById(deviceId);
         if(customer.isPresent())
             device.ifPresentOrElse(dev -> {
