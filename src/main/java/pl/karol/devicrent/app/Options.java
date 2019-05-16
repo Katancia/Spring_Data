@@ -8,7 +8,8 @@ public enum Options {
     DELETE_DEVICE(5, "Delete device"),
     DELETE_CATEGORY(6, "Delete category"),
     DELETE_CUSTOMER(7, "Delete client"),
-    END(8, "End");
+    SEARCH_DEVICES(8, "Search products"),
+    END(9, "End");
 
     private int id;
     private String description;

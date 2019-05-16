@@ -6,6 +6,7 @@ import pl.karol.devicrent.components.category.Category;
 import pl.karol.devicrent.components.category.CategoryRepository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -45,13 +46,13 @@ public class DeviceController {
         device.setPrice(scanner.nextDouble());
         System.out.println("Device quantity:");
         device.setQuantity(scanner.nextInt());
-        System.out.println("Device category(id)");
-        Long deviceCategoryId = scanner.nextLong();
-        Optional<Category> category = categoryRepository.findById(deviceCategoryId);
         scanner.nextLine();
+        System.out.println("Device category(name)");
+        String deviceCategoryName = scanner.nextLine();
+        Optional<Category> category = categoryRepository.findByNameIgnoreCase(deviceCategoryName);
         category.ifPresentOrElse(device::setCategory,
                 () -> {
-                    throw new CategoryNotFoundException("Category with provided ID doesn't exist");
+                    throw new CategoryNotFoundException("Category with provided name doesn't exist");
                 }
         );
         return device;
@@ -62,5 +63,15 @@ public class DeviceController {
         Long deviceId = scanner.nextLong();
         Optional<Device> device = deviceRepository.findById(deviceId);
         device.ifPresentOrElse(deviceRepository::delete,() -> System.out.println("There is no device with this ID"));
+    }
+
+    public void searchDevices() {
+        System.out.println("Give text you want to search for:");
+        String searchText = scanner.nextLine();
+        List<Device> devices = deviceRepository.findAllByNameContainingIgnoreCase(searchText);
+        if(devices.isEmpty())
+            throw new DevicesNotFoundException("There is any devices matching search text");
+        System.out.printf("Found %d devices:\n", devices.size());
+        devices.forEach(System.out::println);
     }
 }

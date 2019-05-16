@@ -82,6 +82,9 @@ public class DevicrentController {
             case DELETE_CUSTOMER:
                 customerController.removeCustomer();
                 break;
+            case SEARCH_DEVICES:
+                deviceController.searchDevices();
+                break;
             case END:
                 close();
         }
